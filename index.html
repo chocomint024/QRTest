@@ -1,69 +1,32 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電波人間用QRコード自動生成ツール</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        #qrcode canvas {
-            width: 100% !important;
-            max-width: 400px; /* 必要に応じて調整 */
-            height: auto !important;
-        }
-        #generatedString {
-            margin-top: 10px;
-            font-size: 18px;
-            word-wrap: break-word; /* 長い文字列を折り返す */
-        }
-        #saveButton {
-            margin-top: 10px;
-            display: none;
-            padding: 10px 20px; /* ボタンの内側のパディングを追加 */
-            font-size: 16px; /* フォントサイズを大きく */
-        }
-        .description {
-            font-size: 12px;
-            color: gray;
-            margin-top: 10px; /* ボタンの下にマージンを追加 */
-        }
-        .selectGroup {
-            display: flex;
-            justify-content: center; /* 中央に配置 */
-            flex-wrap: wrap; /* 折り返しを許可 */
-            margin-top: 10px;
-        }
-        .selectGroup div {
-            margin-right: 20px; /* 各セレクトボックスの右にマージンを追加 */
-            flex: 1 1 auto; /* 幅を自動調整 */
-            min-width: 120px; /* 最小幅を設定 */
-        }
-
-        @media (max-width: 600px) {
-            .selectGroup div {
-                margin-right: 0; /* マージンをリセット */
-                width: 100%; /* 幅を100%に設定 */
-                margin-bottom: 10px; /* 下にマージンを追加 */
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>QR生成と投稿</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .selectGroup {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .selectGroup > div {
+      flex: 1 1 200px;
+    }
+  </style>
 </head>
 <body>
-    <h2>電波人間用QRコード自動生成ツール</h2>
-    <input type="number" id="stringLength" placeholder="文字列の長さを入力 (1-493)" min="1" max="493" value="126" />
-    <button onclick="generateQRCode()">QRコードを生成</button>
-    <div class="description">※126より大きい数だと湧く数は増えますがAndroidとiOSで個体が異なります。</div>
-    
-    <div id="qrcode"></div>
-    <div id="generatedString"></div>
-    <div id="qrCount">QRコード生成回数: 0</div> <!-- 生成回数表示用の要素 -->
 
-    <div class="selectGroup">
+  <h1>QRコード生成ツール</h1>
+
+  <!-- QRコードを生成するボタン -->
+  <button onclick="generateQRCode()">① QRコードを生成する</button>
+
+  <!-- QRコード表示領域 -->
+  <div id="qrcode" style="margin-top: 1rem;"></div>
+
+  <!-- セレクトボックス -->
+  <div class="selectGroup" style="margin-top: 1rem;">  
         <div>
             <strong>回避率</strong>
             <select id="avoidanceSelect">
@@ -100,6 +63,24 @@
                 <option value="水">水</option>
                 <option value="紫">紫</option>
                 <option value="白">白</option>
+                <option value="薄黒">薄黒</option>
+                <option value="薄赤">薄赤</option>
+                <option value="薄青">薄青</option>
+                <option value="薄黄">薄黄</option>
+                <option value="薄橙">薄橙</option>
+                <option value="薄緑">薄緑</option>
+                <option value="薄水">薄水</option>
+                <option value="薄紫">薄紫</option>
+                <option value="薄白">薄白</option>
+                <option value="濃黒">濃黒</option>
+                <option value="濃赤">濃赤</option>
+                <option value="濃青">濃青</option>
+                <option value="濃黄">濃黄</option>
+                <option value="濃橙">濃橙</option>
+                <option value="濃緑">濃緑</option>
+                <option value="濃水">濃水</option>
+                <option value="濃紫">濃紫</option>
+                <option value="濃白">濃白</option>
             </select>
         </div>
         <div>
@@ -122,6 +103,43 @@
                 <option value="ふっかつ">ふっかつ</option>
                 <option value="かいふく">かいふく</option>
                 <option value="むてき">むてき</option>
+                <option value="よけにくい">よけにくい</option>
+                <option value="ノックダウン">ノックダウン</option>
+                <option value="なおす">なおす</option>
+                <option value="ぞくせいなおす">ぞくせいなおす</option>
+                <option value="こうふん">こうふん</option>
+                <option value="あしもとガード">あしもとガード</option>
+                <option value="おそくなれ">おそくなれ</option>
+                <option value="よわくなれ">よわくなれ</option>
+                <option value="やわくなれ">やわくなれ</option>
+                <option value="はやくなれ">はやくなれ</option>
+                <option value="つよくなれ">つよくなれ</option>
+                <option value="かたくなれ">かたくなれ</option>
+                <option value="かわしやすい">かわしやすい</option>
+                <option value="どくになれ">どくになれ</option>
+                <option value="めかくし">めかくし</option>
+                <option value="しびれさせる">しびれさせる</option>
+                <option value="ねむらせる">ねむらせる</option>
+                <option value="げどく">げどく</option>
+                <option value="しびれとる">しびれとる</option>
+                <option value="めざめる">めざめる</option>
+                <option value="単体火">単体火</option>
+                <option value="単体水">単体水</option>
+                <option value="単体電気">単体電気</option>
+                <option value="単体土">単体土</option>
+                <option value="単体風">単体風</option>
+                <option value="単体氷">単体氷</option>
+                <option value="単体闇">単体闇</option>
+                <option value="単体光">単体光</option>
+                <option value="3体火">3体火</option>
+                <option value="3体水">3体水</option>
+                <option value="3体電気">3体電気</option>
+                <option value="3体土">3体土</option>
+                <option value="3体風">3体風</option>
+                <option value="3体氷">3体氷</option>
+                <option value="3体風">3体闇</option>
+                <option value="3体風">3体光</option>
+                
             </select>
         </div>
         <div>
@@ -133,96 +151,91 @@
                 <option value="顔素材">顔素材</option>
                 <option value="かわいい">かわいい</option>
                 <option value="かっこいい">かっこいい</option>
+                <option value="髪素材">髪素材</option>
+                <option value="眉素材">眉素材</option>
+                <option value="目素材">目素材</option>
+                <option value="鼻素材">鼻素材</option>
+                <option value="口素材">口素材</option>
+                <option value="顔色素材">顔色素材</option>
             </select>
         </div>
-    </div>
+  </div>
 
-    <button id="saveButton" style="display: none;" onclick="saveQRCode()">QRコード画像を保存</button>
-    <div class="description" id="saveDescription" style="display: none;">※選択肢を押さなくても保存できます。</div>
-    <a id="goToBoard" href="#" onclick="redirectToBoard()">掲示板に行く</a> <!-- 掲示板へのリンク -->
+  <!-- 掲示板に飛ぶボタン（QRコードが生成された後に表示） -->
+  <button id="toBBS" style="margin-top: 1rem; display: none;" onclick="uploadAndRedirect()">
+    ② 掲示板に飛ぶ
+  </button>
 
-    <script>
-        let qrCodeElement;
-        let qrCodeCount = 0; // QRコード生成回数をカウントする変数
+  <script>
+    let qrGenerated = false;
 
-        function generateQRCode() {
-            const maxLength = parseInt(document.getElementById("stringLength").value);
-            if (isNaN(maxLength) || maxLength < 1 || maxLength > 493) {
-                alert("1から493の範囲で文字列の長さを入力してください。");
-                return;
-            }
+    function generateQRCode() {
+      // 既存のQRコード削除
+      document.getElementById("qrcode").innerHTML = "";
 
-            // 最大lengthのランダムな文字列を生成
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let randomString = '';
-            for (let i = 0; i < maxLength; i++) {
-                randomString += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
+      // QRコードに入れる文字列（例：ランダムな英数字16文字）
+      const text = Array.from({ length: 16 }, () =>
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(Math.random() * 62))
+      ).join("");
 
-            // QRコードエリアをクリア
-            document.getElementById("qrcode").innerHTML = "";
-            document.getElementById("generatedString").innerHTML = "";
+      // QRコード生成
+      new QRCode(document.getElementById("qrcode"), {
+        text: text,
+        width: 256,
+        height: 256
+      });
 
-            // QRコードを生成
-            qrCodeElement = document.createElement("div");
-            const qrCodeSize = 400; // QRコードのサイズを固定
-            new QRCode(qrCodeElement, {
-                text: randomString,
-                width: qrCodeSize,
-                height: qrCodeSize
-            });
-            document.getElementById("qrcode").appendChild(qrCodeElement);
+      qrGenerated = true;
 
-            // 生成した文字列を表示
-            document.getElementById("generatedString").innerHTML = "生成した文字列: " + randomString;
+      // 掲示板ボタン表示
+      document.getElementById("toBBS").style.display = "inline-block";
+    }
 
-            // 保存ボタンを表示
-            document.getElementById("saveButton").style.display = "inline";
+    function uploadAndRedirect() {
+      if (!qrGenerated) {
+        alert("先にQRコードを生成してください！");
+        return;
+      }
 
-            // QRコード生成回数を更新
-            qrCodeCount++;
-            document.getElementById("qrCount").innerText = "QRコード生成回数: " + qrCodeCount;
+      const img = document.querySelector("#qrcode img");
+      if (!img) {
+        alert("QRコード画像が見つかりません！");
+        return;
+      }
 
-            // 自動入力のために情報を保存
-            const avoidance = document.getElementById("avoidanceSelect").value;
-            const physique = document.getElementById("physiqueSelect").value;
-            const color = document.getElementById("colorSelect").value;
-            const head = document.getElementById("headSelect").value;
-            const antenna = document.getElementById("antennaSelect").value;
-            const feature = document.getElementById("featureSelect").value;
+      const imageData = img.src.replace(/^data:image\/png;base64,/, "");
 
-            // URLパラメータを作成
-            const params = new URLSearchParams({
-                generatedString: randomString,
-                avoidance: avoidance,
-                physique: physique,
-                color: color,
-                head: head,
-                antenna: antenna,
-                feature: feature
-            });
+      // 各セレクトボックスの値を取得
+      const getValue = id => document.getElementById(id)?.value || "";
+      const params = {
+        avoidance: getValue("avoidanceSelect"),
+        physique: getValue("physiqueSelect"),
+        color: getValue("colorSelect"),
+        head: getValue("headSelect"),
+        antenna: getValue("antennaSelect"),
+        feature: getValue("featureSelect")
+      };
 
-            // 掲示板へのリンクを設定
-            document.getElementById("goToBoard").href = "https://chocomint024.github.io/QRkeizi/?" + params.toString();
-        }
+      // クエリにまとめる
+      const query = new URLSearchParams(params).toString();
 
-        function saveQRCode() {
-            const canvas = qrCodeElement.querySelector("canvas");
-            if (canvas) {
-                const imgSrc = canvas.toDataURL("image/png");
-                const link = document.createElement('a');
+      // ImgBBにアップロード（APIキーを自分のものに）
+      const apiKey = "84fd930a069e7e066eb94ca8eb8a491a"; // ←ここを自分のキーに変更
+      fetch("https://api.imgbb.com/1/upload?key=" + apiKey, {
+        method: "POST",
+        body: new URLSearchParams({ image: imageData })
+      })
+        .then(res => res.json())
+        .then(data => {
+          const imageUrl = encodeURIComponent(data.data.url);
+          window.location.href = `bbs.html?image=${imageUrl}&${query}`;
+        })
+        .catch(err => {
+          console.error("アップロード失敗", err);
+          alert("QRコードのアップロードに失敗しました。");
+        });
+    }
+  </script>
 
-                link.download = "qrcode.png";
-                link.href = imgSrc;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-
-        function redirectToBoard() {
-            // 自動で掲示板にリダイレクトするための関数（ここではリンクを使用）
-        }
-    </script>
 </body>
 </html>
